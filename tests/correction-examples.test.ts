@@ -134,7 +134,6 @@ describe('LLM-JSON Correction Examples', () => {
 }`;
 
     const result = llmJson.extract(input);
-    console.log(result);
 
     expect(result.json).toHaveLength(0); // Because the JSON is malformed, it will not be extracted
   });

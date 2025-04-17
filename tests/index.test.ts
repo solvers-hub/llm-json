@@ -1,33 +1,33 @@
 import LlmJson from '../src/index';
 
 describe('LlmJson', () => {
-    let llmJson: LlmJson;
+  let llmJson: LlmJson;
 
-    beforeEach(() => {
-        llmJson = new LlmJson({ attemptCorrection: true });
-    });
+  beforeEach(() => {
+    llmJson = new LlmJson({ attemptCorrection: true });
+  });
 
-    test('should extract JSON objects', () => {
-        const input = 'This is a JSON object: {"name": "John", "age": 30}';
-        const result = llmJson.extract(input);
+  test('should extract JSON objects', () => {
+    const input = 'This is a JSON object: {"name": "John", "age": 30}';
+    const result = llmJson.extract(input);
 
-        expect(result.text).toHaveLength(1);
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toEqual({ name: 'John', age: 30 });
-    });
+    expect(result.text).toHaveLength(1);
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toEqual({ name: 'John', age: 30 });
+  });
 
-    test('should extract JSON objects and arrays with extractAll', () => {
-        const input = 'JSON object: {"name": "John"} and JSON array: [1, 2, 3]';
-        const result = llmJson.extractAll(input);
+  test('should extract JSON objects and arrays with extractAll', () => {
+    const input = 'JSON object: {"name": "John"} and JSON array: [1, 2, 3]';
+    const result = llmJson.extractAll(input);
 
-        expect(result.text.length).toBeGreaterThan(0);
-        expect(result.json).toHaveLength(2);
-        expect(result.json).toContainEqual({ name: 'John' });
-        expect(result.json).toContainEqual([1, 2, 3]);
-    });
+    expect(result.text.length).toBeGreaterThan(0);
+    expect(result.json).toHaveLength(2);
+    expect(result.json).toContainEqual({ name: 'John' });
+    expect(result.json).toContainEqual([1, 2, 3]);
+  });
 
-    test('should handle the first example from requirements', () => {
-        const input = `<research_planning>
+  test('should handle the first example from requirements', () => {
+    const input = `<research_planning>
 a. Summary: The given organization is unnamed and works in the area of "something new," which suggests an innovative or emerging field. This could involve novel technologies, fresh market approaches, or unexplored domains. Without specific details, assumptions about the sector or industry may involve startups, tech innovation, or trendsetting industries. The focus and goals may lean toward exploration, user adoption, and refinement of novel concepts.
 
 b. Potential Product Features: 
@@ -74,18 +74,18 @@ e. Narrowing Down Objectives:
 }
 \`\`\``;
 
-        const result = llmJson.extractAll(input);
+    const result = llmJson.extractAll(input);
 
-        expect(result.text).toHaveLength(1);
-        expect(result.text[0]).toContain('<research_planning>');
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toHaveProperty('studyName', 'Demo - Innovator Insight');
-        expect(result.json[0]).toHaveProperty('objectives');
-        expect(result.json[0].objectives).toHaveLength(3);
-    });
+    expect(result.text).toHaveLength(1);
+    expect(result.text[0]).toContain('<research_planning>');
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toHaveProperty('studyName', 'Demo - Innovator Insight');
+    expect(result.json[0]).toHaveProperty('objectives');
+    expect(result.json[0].objectives).toHaveLength(3);
+  });
 
-    test('should handle the second example from requirements', () => {
-        const input = `<study_plan_breakdown>
+  test('should handle the second example from requirements', () => {
+    const input = `<study_plan_breakdown>
 1. Required Section Types:
    - Voice Interview (only type required)
    - Since only Voice Interview is required, I'll create 6 Voice Interview sections as per the guidelines
@@ -156,20 +156,20 @@ e. Narrowing Down Objectives:
   ]
 }`;
 
-        const result = llmJson.extractAll(input);
+    const result = llmJson.extractAll(input);
 
-        expect(result.text).toHaveLength(1);
-        expect(result.text[0]).toContain('<study_plan_breakdown>');
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toHaveProperty('sections');
-        expect(result.json[0].sections).toHaveLength(6);
-        expect(result.json[0].sections[0]).toHaveProperty('type', 'voiceInterview');
-    });
+    expect(result.text).toHaveLength(1);
+    expect(result.text[0]).toContain('<study_plan_breakdown>');
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toHaveProperty('sections');
+    expect(result.json[0].sections).toHaveLength(6);
+    expect(result.json[0].sections[0]).toHaveProperty('type', 'voiceInterview');
+  });
 
-    test('should use the singleton pattern correctly', () => {
-        const instance1 = LlmJson.getInstance({ attemptCorrection: true });
-        const instance2 = LlmJson.getInstance({ attemptCorrection: false });
+  test('should use the singleton pattern correctly', () => {
+    const instance1 = LlmJson.getInstance({ attemptCorrection: true });
+    const instance2 = LlmJson.getInstance({ attemptCorrection: false });
 
-        expect(instance1).toBe(instance2);
-    });
+    expect(instance1).toBe(instance2);
+  });
 }); 

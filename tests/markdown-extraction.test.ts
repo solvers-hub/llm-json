@@ -1,14 +1,14 @@
 import LlmJson from '../src/index';
 
 describe('LLM-JSON Markdown Extraction', () => {
-    let llmJson: LlmJson;
+  let llmJson: LlmJson;
 
-    beforeEach(() => {
-        llmJson = new LlmJson({ attemptCorrection: true });
-    });
+  beforeEach(() => {
+    llmJson = new LlmJson({ attemptCorrection: true });
+  });
 
-    test('should extract JSON from markdown code block with json tag', () => {
-        const input = `Here's the JSON data you requested:
+  test('should extract JSON from markdown code block with json tag', () => {
+    const input = `Here's the JSON data you requested:
 
 \`\`\`json
 {
@@ -20,18 +20,18 @@ describe('LLM-JSON Markdown Extraction', () => {
 
 Let me know if you need anything else.`;
 
-        const result = llmJson.extract(input);
+    const result = llmJson.extract(input);
 
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toEqual({
-            name: "Product",
-            price: 49.99,
-            available: true
-        });
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toEqual({
+      name: "Product",
+      price: 49.99,
+      available: true
     });
+  });
 
-    test('should extract JSON from markdown code block without language tag', () => {
-        const input = `Here's the data:
+  test('should extract JSON from markdown code block without language tag', () => {
+    const input = `Here's the data:
 
 \`\`\`
 {
@@ -42,15 +42,15 @@ Let me know if you need anything else.`;
 }
 \`\`\``;
 
-        const result = llmJson.extract(input);
+    const result = llmJson.extract(input);
 
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0].users).toHaveLength(2);
-        expect(result.json[0].users[0].name).toBe("Alice");
-    });
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0].users).toHaveLength(2);
+    expect(result.json[0].users[0].name).toBe("Alice");
+  });
 
-    test('should extract multiple JSON objects from multiple markdown blocks', () => {
-        const input = `First object:
+  test('should extract multiple JSON objects from multiple markdown blocks', () => {
+    const input = `First object:
 
 \`\`\`json
 {"type": "header", "text": "Welcome"}
@@ -62,15 +62,15 @@ Second object:
 {"type": "button", "text": "Click me"}
 \`\`\``;
 
-        const result = llmJson.extractAll(input);
+    const result = llmJson.extractAll(input);
 
-        expect(result.json).toHaveLength(2);
-        expect(result.json[0]).toEqual({ type: "header", text: "Welcome" });
-        expect(result.json[1]).toEqual({ type: "button", text: "Click me" });
-    });
+    expect(result.json).toHaveLength(2);
+    expect(result.json[0]).toEqual({ type: "header", text: "Welcome" });
+    expect(result.json[1]).toEqual({ type: "button", text: "Click me" });
+  });
 
-    test('should extract JSON from markdown block mixed with other code blocks', () => {
-        const input = `Here's a JavaScript snippet:
+  test('should extract JSON from markdown block mixed with other code blocks', () => {
+    const input = `Here's a JavaScript snippet:
 
 \`\`\`javascript
 const x = 10;
@@ -94,18 +94,18 @@ def hello():
     print("Hello, world!")
 \`\`\``;
 
-        const result = llmJson.extract(input);
+    const result = llmJson.extract(input);
 
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toEqual({
-            server: "production",
-            port: 8080,
-            debug: false
-        });
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toEqual({
+      server: "production",
+      port: 8080,
+      debug: false
     });
+  });
 
-    test('Real LLM Example: API Response Documentation', () => {
-        const input = `# API Response Format
+  test('Real LLM Example: API Response Documentation', () => {
+    const input = `# API Response Format
 
 The API returns a JSON object with the following structure:
 
@@ -145,17 +145,17 @@ For error responses, the format is:
 }
 \`\`\``;
 
-        const result = llmJson.extractAll(input);
+    const result = llmJson.extractAll(input);
 
-        expect(result.json).toHaveLength(2);
-        expect(result.json[0]).toHaveProperty('status', 'success');
-        expect(result.json[0].data).toHaveProperty('attributes');
-        expect(result.json[1]).toHaveProperty('status', 'error');
-        expect(result.json[1].error).toHaveProperty('code', 'NOT_FOUND');
-    });
+    expect(result.json).toHaveLength(2);
+    expect(result.json[0]).toHaveProperty('status', 'success');
+    expect(result.json[0].data).toHaveProperty('attributes');
+    expect(result.json[1]).toHaveProperty('status', 'error');
+    expect(result.json[1].error).toHaveProperty('code', 'NOT_FOUND');
+  });
 
-    test('Real LLM Example: Configuration with Comments', () => {
-        const input = `I recommend the following configuration:
+  test('Real LLM Example: Configuration with Comments', () => {
+    const input = `I recommend the following configuration:
 
 \`\`\`json
 {
@@ -183,18 +183,18 @@ For error responses, the format is:
 
 Make sure to update the database host for your specific environment.`;
 
-        const result = llmJson.extract(input);
+    const result = llmJson.extract(input);
 
-        // The SDK should handle JSON with comments
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toHaveProperty('app');
-        expect(result.json[0].app).toHaveProperty('name', 'Task Manager');
-        expect(result.json[0]).toHaveProperty('database');
-        expect(result.json[0]).toHaveProperty('features');
-    });
+    // The SDK should handle JSON with comments
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toHaveProperty('app');
+    expect(result.json[0].app).toHaveProperty('name', 'Task Manager');
+    expect(result.json[0]).toHaveProperty('database');
+    expect(result.json[0]).toHaveProperty('features');
+  });
 
-    test('Real LLM Example: Complex Markdown with JSON', () => {
-        const input = `# System Architecture
+  test('Real LLM Example: Complex Markdown with JSON', () => {
+    const input = `# System Architecture
 
 ## Components
 
@@ -240,12 +240,12 @@ The system consists of the following components:
 }
 \`\`\``;
 
-        const result = llmJson.extractAll(input);
+    const result = llmJson.extractAll(input);
 
-        expect(result.json).toHaveLength(2);
-        expect(result.json[0]).toHaveProperty('build');
-        expect(result.json[0].build).toHaveProperty('outputPath', 'dist');
-        expect(result.json[1]).toHaveProperty('server');
-        expect(result.json[1].server.cors.origins).toHaveLength(1);
-    });
+    expect(result.json).toHaveLength(2);
+    expect(result.json[0]).toHaveProperty('build');
+    expect(result.json[0].build).toHaveProperty('outputPath', 'dist');
+    expect(result.json[1]).toHaveProperty('server');
+    expect(result.json[1].server.cors.origins).toHaveLength(1);
+  });
 }); 

@@ -1,14 +1,14 @@
 import LlmJson from '../src/index';
 
 describe('LLM-JSON Additional Real Examples', () => {
-    let llmJson: LlmJson;
+  let llmJson: LlmJson;
 
-    beforeEach(() => {
-        llmJson = new LlmJson({ attemptCorrection: true });
-    });
+  beforeEach(() => {
+    llmJson = new LlmJson({ attemptCorrection: true });
+  });
 
-    test('Example 1: Basic weather report', () => {
-        const input = `Based on your request for a weather forecast, here's the current information:
+  test('Example 1: Basic weather report', () => {
+    const input = `Based on your request for a weather forecast, here's the current information:
 
 {
   "location": "San Francisco",
@@ -36,17 +36,17 @@ describe('LLM-JSON Additional Real Examples', () => {
 
 I hope this helps with your planning!`;
 
-        const result = llmJson.extract(input);
+    const result = llmJson.extract(input);
 
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toHaveProperty('location', 'San Francisco');
-        expect(result.json[0].currentWeather).toHaveProperty('temperature', 72);
-        expect(result.json[0].forecast).toHaveLength(2);
-        expect(result.json[0].forecast[1].condition).toBe('Foggy Morning');
-    });
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toHaveProperty('location', 'San Francisco');
+    expect(result.json[0].currentWeather).toHaveProperty('temperature', 72);
+    expect(result.json[0].forecast).toHaveLength(2);
+    expect(result.json[0].forecast[1].condition).toBe('Foggy Morning');
+  });
 
-    test('Example 2: Product analysis with code blocks', () => {
-        const input = `Here's my analysis of the product performance:
+  test('Example 2: Product analysis with code blocks', () => {
+    const input = `Here's my analysis of the product performance:
 
 \`\`\`json
 {
@@ -71,18 +71,18 @@ I hope this helps with your planning!`;
 
 Let me know if you need any clarification on these points.`;
 
-        const result = llmJson.extract(input);
+    const result = llmJson.extract(input);
 
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toHaveProperty('productName', 'Smart Speaker Pro');
-        expect(result.json[0]).toHaveProperty('overallRating', 4.2);
-        expect(result.json[0].metrics).toHaveProperty('customerSatisfaction', 4.5);
-        expect(result.json[0].topFeatures).toContain('Voice recognition');
-        expect(result.json[0].improvementAreas).toHaveLength(2);
-    });
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toHaveProperty('productName', 'Smart Speaker Pro');
+    expect(result.json[0]).toHaveProperty('overallRating', 4.2);
+    expect(result.json[0].metrics).toHaveProperty('customerSatisfaction', 4.5);
+    expect(result.json[0].topFeatures).toContain('Voice recognition');
+    expect(result.json[0].improvementAreas).toHaveLength(2);
+  });
 
-    test('Example 3: User analysis with correctable JSON', () => {
-        const input = `Based on our analysis, here's the user profile:
+  test('Example 3: User analysis with correctable JSON', () => {
+    const input = `Based on our analysis, here's the user profile:
 
 {
   "userId": "U12345",
@@ -99,17 +99,17 @@ Let me know if you need any clarification on these points.`;
   "feedbackScore": 4.7
 }`;
 
-        const result = llmJson.extract(input);
+    const result = llmJson.extract(input);
 
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toHaveProperty('userId', 'U12345');
-        expect(result.json[0].demographics).toHaveProperty('ageGroup', '25-34');
-        expect(result.json[0].appUsage.mostUsedFeatures).toContain('Dashboard');
-        expect(result.json[0]).toHaveProperty('feedbackScore', 4.7);
-    });
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toHaveProperty('userId', 'U12345');
+    expect(result.json[0].demographics).toHaveProperty('ageGroup', '25-34');
+    expect(result.json[0].appUsage.mostUsedFeatures).toContain('Dashboard');
+    expect(result.json[0]).toHaveProperty('feedbackScore', 4.7);
+  });
 
-    test('Example 4: Multiple JSON objects in response', () => {
-        const input = `Here are two separate data objects:
+  test('Example 4: Multiple JSON objects in response', () => {
+    const input = `Here are two separate data objects:
 
 First, the user profile:
 {
@@ -128,16 +128,16 @@ And here's the project status:
   "dueDate": "2023-06-30"
 }`;
 
-        const result = llmJson.extractAll(input);
+    const result = llmJson.extractAll(input);
 
-        expect(result.json).toHaveLength(2);
-        expect(result.json[0]).toHaveProperty('name', 'Jane Smith');
-        expect(result.json[1]).toHaveProperty('projectId', 'PRJ-2023-005');
-        expect(result.json[1]).toHaveProperty('completion', 68);
-    });
+    expect(result.json).toHaveLength(2);
+    expect(result.json[0]).toHaveProperty('name', 'Jane Smith');
+    expect(result.json[1]).toHaveProperty('projectId', 'PRJ-2023-005');
+    expect(result.json[1]).toHaveProperty('completion', 68);
+  });
 
-    test('Example 5: Complex nested structure', () => {
-        const input = `The team organization structure is as follows:
+  test('Example 5: Complex nested structure', () => {
+    const input = `The team organization structure is as follows:
 
 {
   "department": "Engineering",
@@ -178,17 +178,17 @@ And here's the project status:
   ]
 }`;
 
-        const result = llmJson.extract(input);
+    const result = llmJson.extract(input);
 
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toHaveProperty('department', 'Engineering');
-        expect(result.json[0].teams).toHaveLength(2);
-        expect(result.json[0].teams[0].projects[0].name).toBe('UI Redesign');
-        expect(result.json[0].teams[1].projects[0].technologies).toContain('Express');
-    });
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toHaveProperty('department', 'Engineering');
+    expect(result.json[0].teams).toHaveLength(2);
+    expect(result.json[0].teams[0].projects[0].name).toBe('UI Redesign');
+    expect(result.json[0].teams[1].projects[0].technologies).toContain('Express');
+  });
 
-    test('Example 6: Handling malformed JSON with correction', () => {
-        const input = `Here's the event schedule:
+  test('Example 6: Handling malformed JSON with correction', () => {
+    const input = `Here's the event schedule:
 
 {
   "eventName": "Tech Conference 2023",
@@ -215,12 +215,12 @@ And here's the project status:
   ]
 }`;
 
-        const result = llmJson.extract(input);
+    const result = llmJson.extract(input);
 
-        expect(result.json).toHaveLength(1);
-        expect(result.json[0]).toHaveProperty('eventName', 'Tech Conference 2023');
-        expect(result.json[0].sessions).toHaveLength(3);
-        expect(result.json[0].sessions[1].title).toBe('Future of AI');
-        expect(result.json[0].sessions[2].title).toBe('Networking Lunch');
-    });
+    expect(result.json).toHaveLength(1);
+    expect(result.json[0]).toHaveProperty('eventName', 'Tech Conference 2023');
+    expect(result.json[0].sessions).toHaveLength(3);
+    expect(result.json[0].sessions[1].title).toBe('Future of AI');
+    expect(result.json[0].sessions[2].title).toBe('Networking Lunch');
+  });
 }); 
