@@ -45,14 +45,6 @@ console.log(text); // ['Here\'s some text followed by JSON:']
 console.log(json); // [{ name: 'John', age: 30, skills: ['JavaScript', 'TypeScript', 'React'] }]
 ```
 
-## Documentation
-
-For detailed documentation and examples:
-
-- [API Documentation](https://github.com/solvers-hub/llm-json/blob/main/docs/API.md)
-- [Examples](https://github.com/solvers-hub/llm-json/blob/main/docs/Examples.md)
-- [Full Documentation](https://github.com/solvers-hub/llm-json/tree/main/docs)
-
 ## License
 
 MIT © 2023 
