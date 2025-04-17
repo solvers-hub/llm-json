@@ -22,13 +22,13 @@ LLM-JSON is a lightweight library designed to parse and extract JSON objects fro
 ### Installation
 
 ```bash
-npm install llm-json
+npm install @solvers-hub/llm-json
 ```
 
 ### Basic Usage
 
 ```typescript
-import { LlmJson } from 'llm-json';
+import { LlmJson } from '@solvers-hub/llm-json';
 
 const llmOutput = `Here's some text followed by JSON:
 
