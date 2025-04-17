@@ -1,0 +1,45 @@
+{
+    "name": "llm-json",
+    "version": "0.1.0",
+    "description": "A TypeScript SDK to extract and correct JSON from LLM outputs",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "author": "Solvers Hub",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "test": "jest",
+        "test:coverage": "jest --coverage",
+        "lint": "eslint src/**/*.ts",
+        "prepublishOnly": "npm run build",
+        "example": "ts-node examples/example.ts",
+        "build:example": "tsc && node dist/examples/example.js",
+        "docs": "typedoc --out docs src",
+        "docs:md": "typedoc --out docs-md --plugin typedoc-plugin-markdown src"
+    },
+    "report": {
+        "type": "git",
+        "url": "https://github.com/solvers-hub/llm-json.git"
+    },
+    "bugs": {
+        "url": "https://github.com/solvers-hub/llm-json/issues"
+    },
+    "homepage": "https://github.com/solvers-hub/llm-json#readme",
+    "keywords": [
+        "llm",
+        "json",
+        "extractor",
+        "parser"
+    ],
+    "devDependencies": {
+        "@types/jest": "^29.5.0",
+        "@types/node": "^18.15.11",
+        "jest": "^29.5.0",
+        "ts-jest": "^29.1.0",
+        "typescript": "^5.0.4",
+        "ts-node": "^10.9.1"
+    },
+    "files": [
+        "dist/**/*"
+    ]
+}
