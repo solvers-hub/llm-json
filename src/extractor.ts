@@ -1,11 +1,13 @@
-import { ExtractOptions, ExtractResult, JsonBlock, JsonParseError } from './types';
+import { ExtractOptions, ExtractResult, JsonBlock, JsonParseError, ValidationResult } from './types';
 import { JsonCorrector } from './corrector';
+import { SchemaValidator } from './validator';
 
 /**
  * JsonExtractor class for extracting JSON from text input.
  */
 export class JsonExtractor {
     protected options: ExtractOptions;
+    protected schemaValidator: SchemaValidator | null = null;
 
     /**
      * Creates a new instance of JsonExtractor.
@@ -16,6 +18,11 @@ export class JsonExtractor {
             attemptCorrection: false,
             ...options
         };
+
+        // Initialize schema validator if schemas are provided
+        if (this.options.schemas && this.options.schemas.length > 0) {
+            this.schemaValidator = new SchemaValidator();
+        }
     }
 
     /**
@@ -47,9 +54,14 @@ export class JsonExtractor {
                 let parsed;
                 try {
                     parsed = JSON.parse(correctionResult.corrected);
+
+                    // Apply schema validation if schemas are provided
+                    const validatedJson = this.validateJson([parsed]);
+
                     return {
                         text: [],
-                        json: [parsed]
+                        json: [parsed],
+                        ...(validatedJson.length > 0 && { validatedJson })
                     };
                 } catch (e) {
                     // Failed to parse, continue with regular extraction
@@ -63,10 +75,29 @@ export class JsonExtractor {
         const parsedBlocks = this.parseJsonBlocks(jsonBlocks);
         const textBlocks = this.extractTextBlocks(input, jsonBlocks);
 
+        const extractedJson = parsedBlocks.map(block => block.parsed).filter(Boolean);
+
+        // Apply schema validation if schemas are provided
+        const validatedJson = this.validateJson(extractedJson);
+
         return {
             text: textBlocks,
-            json: parsedBlocks.map(block => block.parsed).filter(Boolean)
+            json: extractedJson,
+            ...(validatedJson.length > 0 && { validatedJson })
         };
+    }
+
+    /**
+     * Validates JSON objects against provided schemas.
+     * @param jsonObjects - The JSON objects to validate.
+     * @returns Array of validation results.
+     */
+    protected validateJson(jsonObjects: any[]): ValidationResult[] {
+        if (!this.schemaValidator || !this.options.schemas || !jsonObjects.length) {
+            return [];
+        }
+
+        return this.schemaValidator.validateAll(jsonObjects, this.options.schemas);
     }
 
     /**
@@ -268,8 +299,6 @@ export class JsonExtractor {
                     const inBetweenText = input.substring(currentBlock.endIndex + 1, nextBlock.startIndex).trim();
                     if (inBetweenText) {
                         textBlocks.push(inBetweenText);
-                    } else {
-                        textBlocks.push('');  // Add empty segment to maintain expected count
                     }
                 }
             }

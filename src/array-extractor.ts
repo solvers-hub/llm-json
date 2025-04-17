@@ -186,9 +186,16 @@ export class JsonArrayExtractor extends JsonExtractor {
         const rawTextBlocks = this.extractTextBlocks(input, visibleJsonBlocks);
         const cleanedTextBlocks = this.cleanTextBlocks(rawTextBlocks);
 
+        // Combine filtered objects and standalone arrays
+        const combinedJson = [...filteredObjects, ...standaloneArrays];
+
+        // Apply schema validation if schemas are provided
+        const validatedJson = this.validateJson(combinedJson);
+
         return {
             text: cleanedTextBlocks,
-            json: [...filteredObjects, ...standaloneArrays]
+            json: combinedJson,
+            ...(validatedJson.length > 0 && { validatedJson })
         };
     }
 } 

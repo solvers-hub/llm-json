@@ -7,6 +7,53 @@ export interface ExtractOptions {
      * @default false
      */
     attemptCorrection?: boolean;
+
+    /**
+     * JSON schemas to validate extracted JSON against.
+     * If provided, the extracted JSON will be validated against these schemas.
+     * @default undefined
+     */
+    schemas?: SchemaDefinition[];
+}
+
+/**
+ * Definition of a JSON schema for validation.
+ */
+export interface SchemaDefinition {
+    /**
+     * A unique name for the schema to identify which schema matched.
+     */
+    name: string;
+
+    /**
+     * The JSON schema object conforming to JSON Schema specification.
+     */
+    schema: object;
+}
+
+/**
+ * Result of schema validation for a JSON object.
+ */
+export interface ValidationResult {
+    /**
+     * The JSON object that was validated.
+     */
+    json: any;
+
+    /**
+     * The name of the schema that matched, or null if no schema matched.
+     */
+    matchedSchema: string | null;
+
+    /**
+     * Whether the JSON is valid according to the matched schema.
+     */
+    isValid: boolean;
+
+    /**
+     * Validation errors if any, or undefined if validation passed.
+     */
+    validationErrors?: any[];
 }
 
 /**
@@ -22,6 +69,11 @@ export interface ExtractResult {
      * Array of parsed JSON objects extracted from the input.
      */
     json: any[];
+
+    /**
+     * Array of validated JSON results, only present if schemas were provided.
+     */
+    validatedJson?: ValidationResult[];
 }
 
 /**
