@@ -1,3 +1,5 @@
+@solvers-hub/llm-json / [Exports](modules.md)
+
 # LLM-JSON Extractor
 
 A TypeScript SDK for extracting and correcting JSON data from LLM outputs.
@@ -47,12 +49,11 @@ console.log(json); // [{ name: 'John', age: 30, skills: ['JavaScript', 'TypeScri
 
 ## Documentation
 
-For detailed documentation and examples:
+For detailed documentation including API references and examples:
 
-- [API Documentation](https://github.com/solvers-hub/llm-json/blob/main/docs/API.md)
-- [Examples](https://github.com/solvers-hub/llm-json/blob/main/docs/Examples.md)
-- [Full Documentation](https://github.com/solvers-hub/llm-json/tree/main/docs)
+- [API Documentation](./docs/README.md)
+- [Examples](./docs/examples.md)
 
 ## License
 
-MIT © 2023 
+MIT © 2023
