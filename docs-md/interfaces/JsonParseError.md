@@ -22,7 +22,7 @@ The original error message.
 
 #### Defined in
 
-[types.ts:64](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/types.ts#L64)
+[types.ts:116](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/types.ts#L116)
 
 ___
 
@@ -34,7 +34,7 @@ The position in the JSON string where the error occurred.
 
 #### Defined in
 
-[types.ts:74](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/types.ts#L74)
+[types.ts:126](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/types.ts#L126)
 
 ___
 
@@ -46,4 +46,4 @@ The raw JSON string that failed to parse.
 
 #### Defined in
 
-[types.ts:69](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/types.ts#L69)
+[types.ts:121](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/types.ts#L121)

@@ -30,28 +30,27 @@ export class JsonCorrector {
                 this.fixExtraCommas
             ];
 
-            for (const strategy of strategies) {
-                const correctedJson = strategy(jsonString);
-                try {
-                    JSON.parse(correctedJson);
-                    return { corrected: correctedJson, wasCorrected: true };
-                } catch (e) {
-                    // Try the next strategy
-                }
-            }
-
-            // If all strategies failed, try a combination of them
             let attemptedCorrection = jsonString;
             let wasCorrected = wasCommentsRemoved;
 
+            // Trying both single strategies and cumulative fixes
             for (const strategy of strategies) {
+                // Try single strategy
+                const singleStrategyResult = strategy(jsonString);
+                try {
+                    JSON.parse(singleStrategyResult);
+                    return { corrected: singleStrategyResult, wasCorrected: true };
+                } catch (e) {
+                    // Single strategy failed, continue with cumulative approach
+                }
+
+                // Apply current strategy to our cumulative attempt
                 attemptedCorrection = strategy(attemptedCorrection);
                 try {
                     JSON.parse(attemptedCorrection);
-                    wasCorrected = true;
-                    break;
+                    return { corrected: attemptedCorrection, wasCorrected: true };
                 } catch (e) {
-                    // Continue with the next strategy
+                    // Continue with next strategy
                 }
             }
 
@@ -165,4 +164,4 @@ export class JsonCorrector {
         // Replace multiple commas with a single comma
         return jsonString.replace(/,\s*,+/g, ',');
     }
-} 
+}

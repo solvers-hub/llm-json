@@ -24,7 +24,7 @@ The end index of the JSON block in the input string.
 
 #### Defined in
 
-[types.ts:44](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/types.ts#L44)
+[types.ts:96](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/types.ts#L96)
 
 ___
 
@@ -36,7 +36,7 @@ The parsed JSON object.
 
 #### Defined in
 
-[types.ts:54](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/types.ts#L54)
+[types.ts:106](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/types.ts#L106)
 
 ___
 
@@ -48,7 +48,7 @@ The raw JSON string.
 
 #### Defined in
 
-[types.ts:34](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/types.ts#L34)
+[types.ts:86](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/types.ts#L86)
 
 ___
 
@@ -60,7 +60,7 @@ The start index of the JSON block in the input string.
 
 #### Defined in
 
-[types.ts:39](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/types.ts#L39)
+[types.ts:91](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/types.ts#L91)
 
 ___
 
@@ -72,4 +72,4 @@ Whether the JSON was corrected.
 
 #### Defined in
 
-[types.ts:49](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/types.ts#L49)
+[types.ts:101](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/types.ts#L101)

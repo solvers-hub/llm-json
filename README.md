@@ -99,10 +99,18 @@ console.log(result.validatedJson);
 //   }
 // ]
 
-// Always check isValid and matchedSchema to determine if JSON matched a schema
-const validJsonObjects = result.validatedJson.filter(item => item.isValid);
+```
+
+## Examples
+
+See the [examples](examples) directory for more examples of how to use the library.
+
+How to run the examples:
+
+```bash
+npm run example:run -- examples/example.ts
 ```
 
 ## License
 
-MIT © 2023 
+MIT © 2025 

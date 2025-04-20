@@ -1,5 +1,6 @@
-import { SchemaDefinition, ValidationResult } from './types';
 import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
+import { SchemaDefinition, ValidationResult } from './types';
 
 /**
  * SchemaValidator class for validating JSON against schemas.
@@ -15,6 +16,8 @@ export class SchemaValidator {
             allErrors: true,
             verbose: true
         });
+        // Add format validation support
+        addFormats(this.ajv);
     }
 
     /**
@@ -74,4 +77,4 @@ export class SchemaValidator {
 
         return jsonObjects.map(json => this.validate(json, schemas));
     }
-} 
+}

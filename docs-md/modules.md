@@ -18,6 +18,8 @@
 - [ExtractResult](interfaces/ExtractResult.md)
 - [JsonBlock](interfaces/JsonBlock.md)
 - [JsonParseError](interfaces/JsonParseError.md)
+- [SchemaDefinition](interfaces/SchemaDefinition.md)
+- [ValidationResult](interfaces/ValidationResult.md)
 
 ## References
 

@@ -1,4 +1,4 @@
-import { ExtractOptions, ExtractResult, JsonBlock, JsonParseError, ValidationResult } from './types';
+import { ExtractOptions, ExtractResult, JsonBlock, ValidationResult } from './types';
 import { JsonCorrector } from './corrector';
 import { SchemaValidator } from './validator';
 
@@ -83,7 +83,7 @@ export class JsonExtractor {
         return {
             text: textBlocks,
             json: extractedJson,
-            ...(validatedJson.length > 0 && { validatedJson })
+            validatedJson
         };
     }
 
@@ -92,8 +92,8 @@ export class JsonExtractor {
      * @param jsonObjects - The JSON objects to validate.
      * @returns Array of validation results.
      */
-    protected validateJson(jsonObjects: any[]): ValidationResult[] {
-        if (!this.schemaValidator || !this.options.schemas || !jsonObjects.length) {
+    protected validateJson(jsonObjects: JsonBlock[]): ValidationResult[] {
+        if (!this.schemaValidator || !this.options.schemas || this.options.schemas.length === 0 || !jsonObjects.length) {
             return [];
         }
 
@@ -218,17 +218,24 @@ export class JsonExtractor {
      * @returns Array of parsed JSON blocks.
      */
     protected parseJsonBlocks(blocks: JsonBlock[]): JsonBlock[] {
-        return blocks.map(block => {
+        // Only return only the blocks that were successfully parsed
+        const parsedBlocks: JsonBlock[] = [];
+
+        for (const block of blocks) {
             try {
                 block.parsed = JSON.parse(block.raw);
-                return block;
+                parsedBlocks.push(block);
             } catch (error) {
                 if (this.options.attemptCorrection) {
-                    return this.attemptJsonCorrection(block, error as Error);
+                    const correctedBlock = this.attemptJsonCorrection(block, error as Error);
+                    if (correctedBlock.parsed) {
+                        parsedBlocks.push(correctedBlock);
+                    }
                 }
-                return block;
             }
-        });
+        }
+
+        return parsedBlocks;
     }
 
     /**
@@ -284,23 +291,6 @@ export class JsonExtractor {
             const lastBlock = input.substring(lastEndIndex).trim();
             if (lastBlock) {
                 textBlocks.push(lastBlock);
-            }
-        }
-
-        // Handle case where no text blocks were found but we need to maintain structure
-        // for tests expecting a certain number of text segments (like separators)
-        if (textBlocks.length === 0 && sortedBlocks.length > 0) {
-            // If multiple JSON blocks, we need to infer text segments between them
-            if (sortedBlocks.length > 1) {
-                // Add placeholder text segments between JSON blocks
-                for (let i = 0; i < sortedBlocks.length - 1; i++) {
-                    const currentBlock = sortedBlocks[i];
-                    const nextBlock = sortedBlocks[i + 1];
-                    const inBetweenText = input.substring(currentBlock.endIndex + 1, nextBlock.startIndex).trim();
-                    if (inBetweenText) {
-                        textBlocks.push(inBetweenText);
-                    }
-                }
             }
         }
 

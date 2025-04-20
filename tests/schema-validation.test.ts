@@ -109,7 +109,7 @@ describe('Schema Validation Tests', () => {
         const result = llmJson.extract(input);
 
         expect(result.json).toHaveLength(1);
-        expect(result.validatedJson).toBeUndefined();
+        expect(result.validatedJson).toHaveLength(0);
     });
 
     test('should validate JSON after correction', () => {

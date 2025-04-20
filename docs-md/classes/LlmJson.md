@@ -42,7 +42,7 @@ Creates a new LlmJson instance with the specified options.
 
 #### Defined in
 
-[index.ts:17](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/index.ts#L17)
+[index.ts:17](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/index.ts#L17)
 
 ## Properties
 
@@ -52,7 +52,7 @@ Creates a new LlmJson instance with the specified options.
 
 #### Defined in
 
-[index.ts:11](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/index.ts#L11)
+[index.ts:11](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/index.ts#L11)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[index.ts:10](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/index.ts#L10)
+[index.ts:10](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/index.ts#L10)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[index.ts:9](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/index.ts#L9)
+[index.ts:9](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/index.ts#L9)
 
 ## Methods
 
@@ -96,7 +96,7 @@ An object containing arrays of extracted text and JSON.
 
 #### Defined in
 
-[index.ts:39](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/index.ts#L39)
+[index.ts:39](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/index.ts#L39)
 
 ___
 
@@ -120,7 +120,7 @@ An object containing arrays of extracted text and JSON.
 
 #### Defined in
 
-[index.ts:48](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/index.ts#L48)
+[index.ts:48](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/index.ts#L48)
 
 ___
 
@@ -144,4 +144,4 @@ The LlmJson singleton instance.
 
 #### Defined in
 
-[index.ts:27](https://github.com/solvers-hub/llm-json/blob/4d60f7fa6cdcace0d353b33e3d79c6fd33db1860/src/index.ts#L27)
+[index.ts:27](https://github.com/solvers-hub/llm-json/blob/6d8d00890ee1d42b63f8bb8c3f6401333e41041e/src/index.ts#L27)
