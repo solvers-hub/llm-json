@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "solvers_hub_llm_json"
+version = "0.1.1"
+authors = [
+  {name = "Solvers Hub", email = "v.nitish.work@gmail.com"},
+  {name = "Nitish", email = "v.nitish.work@gmail.com"}
+]
+description = "A Python library to extract and correct JSON from LLM outputs"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "jsonschema>=4.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/solvers-hub/llm-json"
+"Bug Tracker" = "https://github.com/solvers-hub/llm-json/issues" 
