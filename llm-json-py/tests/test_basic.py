@@ -5,8 +5,8 @@ import os
 # Check if the package is installed or if we're running from source
 try:
     # Try to import from installed package
-    from llm_json import LlmJson, get_instance
-    import llm_json
+    from solvers_hub_llm_json import LlmJson, get_instance
+    import solvers_hub_llm_json
     is_installed = True
 except ImportError:
     # Fall back to importing from source

@@ -20,7 +20,7 @@ LLM-JSON is a lightweight library designed to parse and extract JSON objects fro
 ### Installation
 
 ```bash
-pip install solvers-hub-llm-json
+pip install solvers_hub_llm_json
 ```
 
 ### Basic Usage

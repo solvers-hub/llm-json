@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "solvers_hub_llm_json"
-version = "0.1.1"
+version = "0.1.2"
 authors = [
   {name = "Solvers Hub", email = "v.nitish.work@gmail.com"},
   {name = "Nitish", email = "v.nitish.work@gmail.com"}
