@@ -2,7 +2,7 @@
 
 A TypeScript SDK for extracting and correcting JSON data from LLM outputs.
 
-[![npm version](https://badge.fury.io/js/llm-json.svg)](https://badge.fury.io/js/llm-json)
+[![npm version](https://img.shields.io/npm/v/llm-json.svg)](https://www.npmjs.com/package/llm-json)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/solvers-hub/llm-json)
 
