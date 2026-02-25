@@ -1,6 +1,6 @@
 {
     "name": "@solvers-hub/llm-json",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "description": "A TypeScript SDK to extract and correct JSON from LLM outputs",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -50,9 +50,6 @@
         "js-yaml": "^4.1.1"
     },
     "files": [
-        "dist/**/*",
-        "docs/**/*",
-        "docs-md/**/*",
-        "examples/**/*"
+        "dist/**/*"
     ]
 }
